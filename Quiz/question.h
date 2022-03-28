@@ -14,6 +14,5 @@ public:
 
 	question(string pro, string an)
 		:prompt(pro), answer(an) {
-
 	}
 };
