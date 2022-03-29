@@ -12,7 +12,18 @@ public:
 	question(){}
 	~question(){}
 
-	question(string pro, string an)
-		:prompt(pro), answer(an) {
+	question(string pro)
+		:prompt(pro){
 	}
+
+	/*정답을 받는 함수.
+	new_answer로 정답을 받아서 answer에 넣어준다.*/
+	void have_answer() {
+		string new_answer = "";
+		cout << "What is an answer?" << endl;
+		cin >> new_answer;
+		answer = new_answer;
+	}
+
+	
 };

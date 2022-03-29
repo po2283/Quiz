@@ -15,24 +15,40 @@ int main()
     /*클래스를 자료형으로 해서 벡터를 넣는 방법을 알아냈다!
     http://www.soen.kr/lecture/ccpp/cpp4/40-1-4.htm */
     vector<question*> qq;
-
-    /*동적 할당을 해준다.
-    for문으로 돌려볼까 했는데 답이 각각 달라서 그건 안됨.*/
-    qq.push_back(new question(question_answer[0], "a"));
-    qq.push_back(new question(question_answer[1], "c"));
-    qq.push_back(new question(question_answer[2], "b"));
-
     int score = 0;
     string answer = "";
+    int ready = 0;
 
-    /*qq를 qqq로 받아서 문제를 출력하고 답을 받아서 비교해서 score을 올려준다.*/
+    /*answer을 입력하므로 for문으로 push_back할 수 있다.*/
+    for (auto qqq : question_answer) {
+        qq.push_back(new question(qqq));
+    }
+
+    /*정답을 받는 for문*/
     for (auto qqq : qq) {
         cout << qqq->prompt;
-        cin >> answer;
+        qqq->have_answer();
         cout << endl;
-        if (answer == qqq->answer) {
-            score++;
+    }
+
+    cout << "Are you ready?" << endl;
+    cout << "Press 1 if you are ready" << endl;
+    cin >> ready;
+    cout << endl;
+
+    if (ready == 1) {
+        /*문제를 푸는 for문*/
+        for (auto qqq : qq) {
+            cout << qqq->prompt;
+            cin >> answer;
+            cout << endl;
+            if (answer == qqq->answer) {
+                score++;
+            }
         }
+    }
+    else {
+        cout << "No?" << endl;
     }
 
     /*아까 동절할당해줬던 qq를 delete해준다.*/
@@ -42,4 +58,5 @@ int main()
 
     /*총 점수 출력.*/
     cout << "Your score is " << score << endl;
+
 }
